@@ -5,7 +5,7 @@ template <typename T>
 class Solver
 {
  public:
-	virtual T getMin(size_t start, size_t end) const = 0;
+	T getMin(size_t start, size_t end) const {return T{};};
 };
 
 /*
@@ -28,7 +28,7 @@ public:
 			}
 		}
 	}
-	T getMin(size_t x1, size_t x2) const override
+	T getMin(size_t x1, size_t x2) const
 	{
 		assert(x1 < mSize && x2 <= mSize && x1 < x2);
 		return mCalculatedMins[x1*mSize+x2];
@@ -61,9 +61,9 @@ public:
 	}
 	~MinSegmentTree()
 	{
-		
+		//TODO: destruct properly
 	}
-	T getMin(size_t start, size_t end) const override
+	T getMin(size_t start, size_t end) const
 	{
 		assert(end > start);
 		return minOfSubTree(m_root, start, end);
@@ -124,6 +124,7 @@ private:
 
 int main()
 {
+	//                  0  1  2  3  4  5  6  7  8
 	vector<int> nums = {1, 5, 1, 7, 2, 7, 2, 4, 6};
 	AllSolutionsSolver ass(nums);
 	MinSegmentTree<int> msb(nums);
